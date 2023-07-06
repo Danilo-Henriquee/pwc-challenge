@@ -12,6 +12,11 @@ public class Main {
         System.out.println(removeDuplicatedCharacters("Hello, World!"));
         System.out.println(removeDuplicatedCharacters("The day is beautiful today"));
         System.out.println(removeDuplicatedCharacters("I like the intern program of PwC"));
+
+        // Challenge 3
+        System.out.println(findMajorPalindrome("radar"));
+        System.out.println(findMajorPalindrome("rotator"));
+        System.out.println(findMajorPalindrome("repaper"));
     }
 
     public static String revertOrder(String s) {
@@ -49,5 +54,25 @@ public class Main {
         while(cloned[i] != letter) i++;
         if (i == letters.length) return false;
         return true;
+    }
+
+    public static String findMajorPalindrome(String s) {
+        List<String> palindromes = new ArrayList<>();
+
+        String palindrome = "";
+        for (int i = 0; i < s.length(); i++) {
+            char letter = s.charAt(i);
+            palindrome += letter;
+
+            String toCompare = "";
+            for (int j = palindrome.length(); j > 0; j--) {
+                toCompare += palindrome.charAt(j - 1);
+                if (toCompare.equals(palindrome)) {
+                    palindromes.add(palindrome);
+                    break;
+                }
+            }
+        }
+        return palindromes.get(palindromes.size() - 1);
     }
 }
