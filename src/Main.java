@@ -8,15 +8,20 @@ public class Main {
         System.out.println(revertOrder("amazing. is OpenAI World! Hello,"));
         System.out.println(revertOrder("The stars twinkle in the dark night sky, creating a magical spectacle."));
 
-        // task 2
+        // Task 2
         System.out.println(removeDuplicatedCharacters("Hello, World!"));
         System.out.println(removeDuplicatedCharacters("The day is beautiful today"));
         System.out.println(removeDuplicatedCharacters("I like the intern program of PwC"));
 
-        // Challenge 3
+        // Task 3
         System.out.println(findMajorPalindrome("radar"));
         System.out.println(findMajorPalindrome("rotator"));
         System.out.println(findMajorPalindrome("repaper"));
+
+        // Task 4
+        System.out.println(formatter("hello. how are you? i'm fine, thank you."));
+        System.out.println(formatter("hey, how was your day? it was okay. nothing special."));
+        System.out.println(formatter("and yours? pretty good! i had a productive day at work."));
     }
 
     public static String revertOrder(String s) {
@@ -74,5 +79,27 @@ public class Main {
             }
         }
         return palindromes.get(palindromes.size() - 1);
+    }
+
+    public static String formatter(String s) {
+        List<String> words = Arrays.asList(s.split(" "));
+        String formatted = "";
+        for (int i = 0; i < words.size(); i++) {
+            String word = words.get(i);
+            if (i == 0) {
+                String firstLetter = String.valueOf(word.charAt(0));
+                word = word.replaceFirst(firstLetter, firstLetter.toUpperCase());
+            }
+            if (i > 0) {
+                String predecessor = words.get(i - 1);
+                String lastChar = String.valueOf(predecessor.charAt(predecessor.length() - 1));
+                if (lastChar.equals("?") || lastChar.equals("!") || lastChar.equals(".")) {
+                    String letterOfWord = String.valueOf(word.charAt(0));
+                    word = word.replaceFirst(letterOfWord, letterOfWord.toUpperCase());
+                }
+            }
+            formatted += word + " ";
+        }
+        return formatted;
     }
 }
