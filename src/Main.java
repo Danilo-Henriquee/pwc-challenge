@@ -22,6 +22,11 @@ public class Main {
         System.out.println(formatter("hello. how are you? i'm fine, thank you."));
         System.out.println(formatter("hey, how was your day? it was okay. nothing special."));
         System.out.println(formatter("and yours? pretty good! i had a productive day at work."));
+
+        // Task 5
+        System.out.println(anagramOfPalindrome("racecar"));
+        System.out.println(anagramOfPalindrome("aabbc"));
+        System.out.println(anagramOfPalindrome("aabbce"));
     }
 
     public static String revertOrder(String s) {
@@ -101,5 +106,36 @@ public class Main {
             formatted += word + " ";
         }
         return formatted;
+    }
+
+    public static String anagramOfPalindrome(String s) {
+        char[] chars = s.toCharArray();
+        int[] counts = new int[s.length()];
+
+        for (int i = 0; i < s.length(); i++) {
+            String digit = String.valueOf(chars[i]);
+            counts[i] = countOccurrence(s, digit);
+        }
+
+        int oddCount = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (!(counts[i] % 2 == 0)) {
+                oddCount++;
+            }
+        }
+        if (oddCount > 1) {
+            return "false";
+        }
+        return "true";
+    }
+    public static int countOccurrence(String word, String letter) {
+        int count = 0;
+        for (int i = 0; i < word.length(); i++) {
+            String let = String.valueOf(word.charAt(i));
+            if (let.equals(letter)) {
+                count++;
+            }
+        }
+        return count;
     }
 }
